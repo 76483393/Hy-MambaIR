@@ -1,0 +1,15 @@
+name: Hy-MambaIR_x4
+inherits: train_hymambair_refinement.yaml
+
+notes:
+  - final paper-line local refinement design
+  - SCAB = CAB + SimAM + SAFM
+  - manuscript main configuration
+
+datasets:
+  train:
+    batch_size_per_gpu: 2
+
+train:
+  gradient_accumulation_steps: 36
+  use_amp: true

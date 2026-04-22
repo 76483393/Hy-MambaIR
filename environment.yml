@@ -1,0 +1,25 @@
+name: hymambair
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - numpy
+  - scipy
+  - pyyaml
+  - pillow
+  - opencv
+  - tqdm
+  - matplotlib
+  - pytorch=2.10
+  - torchvision
+  - torchaudio
+  - pip:
+      - basicsr
+      - einops
+      - timm
+      - lpips
+      - mamba-ssm
+      - causal-conv1d

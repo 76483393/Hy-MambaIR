@@ -1,0 +1,65 @@
+name: Hy-MambaIR_Demo_Eval
+model_type: HyMambaIRModel
+scale: 4
+num_gpu: 1
+manual_seed: 42
+
+# Reviewer-safe demo config pointing only to staged demo patches.
+datasets:
+  val:
+    name: Demo_Paired_Val
+    type: PairedImageDataset
+    dataroot_gt: ./demo_data/HR
+    dataroot_lq: ./demo_data/LR
+    color: y
+    filename_tmpl: '{}'
+    io_backend:
+      type: disk
+    scale: 4
+    gt_size: 256
+    img_size: 64
+    num_worker_per_gpu: 0
+    pin_memory: false
+    phase: val
+
+network_g:
+  type: HyMambaIR
+  upscale: 4
+  in_chans: 1
+  img_size: 64
+  img_range: 1.0
+  embed_dim: 174
+  d_state: 16
+  depths: [6, 6, 6, 6, 6, 6, 6, 6, 6]
+  num_heads: [6, 6, 6, 6, 6, 6, 6, 6, 6]
+  window_size: 16
+  inner_rank: 64
+  num_tokens: 128
+  convffn_kernel_size: 5
+  mlp_ratio: 2.0
+  upsampler: pixelshuffle
+  resi_connection: 1conv
+
+path:
+  pretrain_network_g: ~
+  strict_load_g: false
+  resume_state: ~
+
+val:
+  save_img: false
+  metrics:
+    psnr:
+      type: calculate_psnr
+      crop_border: 4
+      test_y_channel: true
+      better: higher
+    ssim:
+      type: calculate_ssim
+      crop_border: 4
+      test_y_channel: true
+      better: higher
+    lpips:
+      type: calculate_lpips_hymambair
+      crop_border: 4
+      better: lower
+      net: alex

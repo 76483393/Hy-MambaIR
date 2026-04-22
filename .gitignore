@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Environments
+.venv/
+venv/
+env/
+
+# IDE / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Logs and tracking
+*.log
+wandb/
+runs/
+tb_logger/
+
+# Large generated artifacts
+outputs/
+results/
+visualizations/
+.runtime/
+*.state
+
+# Checkpoints are excluded by default; allow the curated paper-line release weight.
+*.pth
+*.ckpt
+!checkpoints/Hy-MambaIR_x4_main.pth
+
+# Sensitive or non-release data
+datasets/
+raw_data/
+private_data/
+
+# Local notebooks
+.ipynb_checkpoints/
